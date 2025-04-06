@@ -1,10 +1,27 @@
-export const onPageLoad = () => {
-    
+export const onPageLoad = () => {   
     const content = document.getElementById('content');
-    addRestaurantHeading(content);
-    addStoreHours(content);
-    addLocation(content);
-    
+    const contentEle = document.createElement('div');
+    contentEle.id = 'childDiv';
+    content.appendChild(contentEle);
+    addNavBarWithButtons(contentEle);
+    addRestaurantHeading(contentEle);
+    addStoreHours(contentEle);
+    addLocation(contentEle);
+}
+
+const addNavBarWithButtons = (content) => {
+    const navEle = document.createElement('nav');
+    appendButtonWithText(document.createTextNode("Home"), navEle, 'home');
+    appendButtonWithText(document.createTextNode("Menu"), navEle, 'menu');
+    appendButtonWithText(document.createTextNode("Contact"), navEle, 'contact');
+    content.appendChild(navEle);
+}
+
+const appendButtonWithText = (text, element, idVal) => {
+    const btn = document.createElement('button');
+    btn.id = idVal;
+    btn.appendChild(text);
+    element.appendChild(btn);
 }
 
 const addRestaurantHeading = (content) => {
@@ -27,8 +44,6 @@ const addStoreHours = (content) => {
 }
 
 const addHours = (content, day) => {
-    
-
     const pElem = document.createElement('p');
     switch (day) {
         case 'Monday':
